@@ -1,5 +1,6 @@
 package com.example.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.flowable.batch.api.Batch;
 import org.flowable.batch.api.BatchPart;
 import org.flowable.batch.api.BatchQuery;
@@ -32,12 +33,19 @@ import org.flowable.task.api.history.HistoricTaskInstanceQuery;
 import org.flowable.task.api.history.HistoricTaskLogEntryQuery;
 import org.flowable.variable.api.history.HistoricVariableInstance;
 import org.flowable.variable.api.history.HistoricVariableInstanceQuery;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import javax.servlet.http.HttpServletRequest;
 
 
 @Service
+@Slf4j
 public class FlowRestInterceptor implements BpmnRestApiInterceptor {
 
+    @Autowired
+    private HttpServletRequest request;
 
     @Override
     public void accessTaskInfoById(Task task) {
@@ -66,7 +74,7 @@ public class FlowRestInterceptor implements BpmnRestApiInterceptor {
 
     @Override
     public void executeTaskAction(Task task, TaskActionRequest actionRequest) {
-        Authentication.setAuthenticatedUserId("1");
+
     }
 
     @Override
@@ -171,8 +179,7 @@ public class FlowRestInterceptor implements BpmnRestApiInterceptor {
 
     @Override
     public void enhanceDeployment(DeploymentBuilder deploymentBuilder) {
-//        String cate = request.getParameter("category");
-//        deploymentBuilder.category(cate);
+        deploymentBuilder.category(request.getParameter("category"));
     }
 
     @Override

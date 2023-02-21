@@ -15,7 +15,6 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Map;
 import java.util.Set;
 
-@SpringBootTest
 @ContextConfiguration(classes = {RestConfig.class})
 @RunWith(SpringRunner.class)
 @Slf4j
