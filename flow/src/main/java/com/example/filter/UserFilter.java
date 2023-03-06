@@ -18,7 +18,6 @@ public class UserFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         String userId = req.getHeader(userHeader);
-        log.error("获取到用户的ID {}", userId);
         if (userId != null && !userId.equals("")) {
             Authentication.setAuthenticatedUserId(userId);
         }
